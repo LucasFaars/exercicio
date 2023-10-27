@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+</head>
+
+<body>
+    <h1>Lista de Tarefas</h1>
+    <div>
+        <input type="text" id="tarefa" placeholder="Adicione uma tarefa">
+        <button onclick="adicionarTarefa()">Adicionar</button>
+    </div>
+    <table id="tabelaTarefas">
+        <thead>
+            <tr>
+                <th>Tarefa</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function adicionarTarefa() {
+            var tarefa = document.getElementById("tarefa").value;
+            if (tarefa.trim() === "") {
+                alert("Por favor, insira uma tarefa!");
+                return;
+            }
+
+            var tabelaTarefas = document.getElementById("tabelaTarefas").getElementsByTagName('tbody')[0];
+            var linha = tabelaTarefas.insertRow();
+            var coluna1 = linha.insertCell(0);
+            var coluna2 = linha.insertCell(1);
+
+            coluna1.textContent = tarefa;
+
+            var botaoExcluir = document.createElement("button");
+            botaoExcluir.textContent = "Excluir";
+            botaoExcluir.addEventListener("click", function() {
+                tabelaTarefas.deleteRow(linha.rowIndex);
+            });
+
+            coluna2.appendChild(botaoExcluir);
+            document.getElementById("tarefa").value = "";
+        }
+    </script>
+</body>
+
+</html>
